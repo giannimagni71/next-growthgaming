@@ -60,11 +60,11 @@ const latestPosts = [...posts]
 
 function AnimatedWord() {
   return (
-    <span className="inline-block relative h-[1.3em]">
+    <span className="inline-flex justify-center relative h-[1.3em] w-full">
       {words.map((word, i) => (
         <motion.span
           key={word}
-          className="absolute left-0 text-gradient font-display"
+          className="absolute text-gradient font-display"
           initial={{ opacity: 0, y: 20 }}
           animate={{
             opacity: [0, 1, 1, 0],
@@ -163,7 +163,7 @@ export default function Home() {
   return (
     <div className="relative">
       {/* Hero */}
-      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] overflow-hidden">
         {/* Video background */}
         <div className="absolute inset-0 z-0">
           <video
@@ -171,151 +171,171 @@ export default function Home() {
             muted
             loop
             playsInline
-            className="w-full h-full object-cover opacity-20"
-            poster="/images/hero-poster.jpg"
+            className="w-full h-full object-cover opacity-30"
           >
             <source src="/video/hero.mp4" type="video/mp4" />
           </video>
-          <div className="video-overlay absolute inset-0" />
-          {/* Atmospheric orange gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-transparent">
-            <div className="absolute inset-0 atmosphere-orange" />
-          </div>
+          {/* Vignette — scurisce i bordi */}
+          <div className="absolute inset-0 video-vignette" />
+          {/* Gradient verticale — top/bottom fade */}
+          <div className="absolute inset-0 video-overlay" />
+          {/* Orange tint — brand coherence */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-gg-orange/5 via-transparent to-transparent" />
         </div>
 
-        {/* Diagonal accent */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent z-[2]" />
+        {/* Ghost text GG */}
+        <div className="ghost-text text-[150px] sm:text-[250px] lg:text-[350px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          GG
+        </div>
 
-        <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 text-center">
-          {/* GG Ghost text */}
-          <div className="ghost-text text-[300px] sm:text-[400px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            GG
-          </div>
+        {/* Hero content */}
+        <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto flex flex-col items-center justify-end pb-16 sm:pb-20 min-h-[85vh]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center"
+          >
+            {/* Title */}
+            <h1 className="font-display text-6xl sm:text-8xl lg:text-[10rem] font-black tracking-tight leading-[0.85]">
+              <span className="block text-white/90">GROWTH</span>
+              <span className="block text-gradient mt-2 sm:mt-3 opacity-90">GAMING</span>
+            </h1>
+          </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="mt-8 sm:mt-10"
           >
-            {/* Logo */}
-            <motion.div
-              className="mb-8 flex justify-center"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <Image
-                src="/images/logo-sfondo-trasparente-Copia-300x293.png"
-                alt="Growth Gaming"
-                width={180}
-                height={180}
-                className="drop-shadow-[0_0_40px_rgba(255,107,0,0.3)]"
-                priority
-              />
-            </motion.div>
-
-            <h1 className="font-display text-6xl sm:text-8xl lg:text-[10rem] font-black tracking-tight mb-4 leading-[0.9]">
-              <span className="text-foreground">GROWTH</span>
-              <br />
-              <span className="text-gradient glow-orange">GAMING</span>
-            </h1>
-
-            {/* Decorative line */}
-            <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-gg-orange/40 to-transparent mx-auto mb-4" />
-
-            <div className="text-xl sm:text-2xl text-muted-foreground mb-3 font-body">
-              <span className="text-gg-orange/60 font-mono text-base mr-2">
-                &gt;
-              </span>
+            <div className="font-display text-xl sm:text-3xl font-bold tracking-wider">
               <AnimatedWord />
             </div>
-
-            <p className="text-lg font-body text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-              Giocare per crescere. Associazione di promozione sociale dedicata
-              alla cultura del videogioco.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/growth-academy"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 bg-gradient-to-r from-gg-orange to-gg-red text-black font-display text-xs font-bold tracking-widest rounded box-glow hover:scale-[1.02] transition-transform"
-              >
-                <GraduationCap className="h-4 w-4" />
-                GROWTH ACADEMY
-              </Link>
-              <Link
-                href="/chi-siamo"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 border border-white/10 text-foreground font-display text-xs font-semibold tracking-widest rounded hover:border-gg-orange/30 hover:bg-gg-orange/5 transition-all"
-              >
-                SCOPRI DI PIU
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
           </motion.div>
 
-          <motion.div
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity }}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="mt-8 font-body text-lg sm:text-xl text-muted-foreground max-w-lg mx-auto leading-relaxed"
           >
-            <ChevronDown className="h-5 w-5 text-gg-orange/30" />
+            Esports, formazione e community. Il gaming come strumento di crescita.
+          </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+            className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link
+              href="/growth-academy"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-gg-orange to-gg-ember text-black font-display text-xs font-bold tracking-widest rounded box-glow hover:scale-105 transition-transform"
+            >
+              GROWTH ACADEMY
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <Link
+              href="/chi-siamo"
+              className="inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-white/20 text-white font-display text-xs font-bold tracking-widest rounded hover:border-gg-orange/40 hover:bg-white/5 transition-all"
+            >
+              SCOPRI DI PIU
+            </Link>
           </motion.div>
         </div>
+
+        {/* Chevron animato */}
+        <motion.div
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="h-6 w-6 text-white/30" />
+        </motion.div>
       </section>
 
       {/* Marquee */}
       <Marquee />
 
-      {/* Features — Asymmetric layout */}
+      {/* Features — Bento grid */}
       <section className="py-28 relative">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <motion.div
-            className="text-center mb-20 relative"
+            className="mb-16 relative"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4 tracking-wide">
-              COSA FACCIAMO
+            <span className="font-display text-[10px] font-bold tracking-[0.3em] text-gg-orange/50 uppercase">
+              Le nostre aree
+            </span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black mt-2 tracking-tight">
+              COSA{" "}
+              <span className="text-gradient">FACCIAMO</span>
             </h2>
-            <div className="w-16 h-[2px] bg-gradient-to-r from-gg-orange to-gg-red mx-auto mb-4" />
-            <p className="text-muted-foreground font-body text-lg max-w-md mx-auto">
-              Quattro aree, un obiettivo: rendere il gaming uno strumento di
-              crescita.
-            </p>
           </motion.div>
 
-          {/* Asymmetric 2+2 grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {features.map((feature, i) => (
+          {/* Bento layout: 1 hero left + 3 stacked right */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
+            {/* Feature hero — ESPORTS */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="group relative lg:col-span-7 lg:row-span-2 p-8 sm:p-10 bg-card/60 border border-white/5 overflow-hidden min-h-[280px] sm:min-h-[360px] flex flex-col justify-end"
+            >
+              {/* Diagonal accent */}
+              <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gg-orange/[0.04] to-transparent" />
+              <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-gg-orange to-gg-red opacity-60 group-hover:opacity-100 transition-opacity" />
+
+              {/* Ghost number */}
+              <div className="ghost-text text-[200px] sm:text-[280px] -right-6 -top-10 opacity-[0.04]">
+                01
+              </div>
+
+              <div className="relative z-10">
+                <div className="inline-flex p-3.5 rounded bg-gg-orange/10 border border-gg-orange/20 mb-6 text-gg-orange">
+                  <Trophy className="h-7 w-7" />
+                </div>
+                <h3 className="font-display text-xl sm:text-2xl font-bold tracking-wider mb-3">
+                  ESPORTS
+                </h3>
+                <p className="font-body text-base sm:text-lg text-muted-foreground leading-relaxed max-w-md">
+                  Tornei, competizioni e team building. Il gaming competitivo fatto bene.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Feature cards — stacked right */}
+            {features.slice(1).map((feature, i) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`group relative p-6 bg-card/60 border border-white/5 card-hover-dramatic clip-card-skew overflow-hidden ${
-                  i === 0 ? "sm:col-span-2 sm:p-8" : ""
-                } ${i === 2 ? "sm:mt-4" : ""} ${i === 3 ? "sm:-mt-4" : ""}`}
+                transition={{ delay: (i + 1) * 0.1 }}
+                className="group relative lg:col-span-5 p-6 sm:p-7 bg-card/60 border border-white/5 overflow-hidden"
               >
-                {/* Left accent bar */}
                 <div className="absolute top-0 left-0 w-[3px] h-full bg-gradient-to-b from-gg-orange to-gg-red opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                {/* Ghost number */}
-                <div className="ghost-text text-[120px] sm:text-[160px] -right-4 -bottom-8 opacity-[0.03]">
-                  {String(i + 1).padStart(2, "0")}
+                <div className="ghost-text text-[100px] sm:text-[120px] -right-3 -bottom-6 opacity-[0.03]">
+                  {String(i + 2).padStart(2, "0")}
                 </div>
 
-                <div className="relative z-10">
-                  <div className="inline-flex p-3 rounded bg-gg-orange/5 border border-gg-orange/10 mb-5 text-gg-orange group-hover:bg-gg-orange/10 transition-colors">
-                    <feature.icon className={`${i === 0 ? "h-6 w-6" : "h-5 w-5"}`} />
+                <div className="relative z-10 flex items-start gap-5">
+                  <div className="shrink-0 inline-flex p-3 rounded bg-gg-orange/5 border border-gg-orange/10 text-gg-orange group-hover:bg-gg-orange/10 transition-colors">
+                    <feature.icon className="h-5 w-5" />
                   </div>
-                  <h3 className={`font-display font-bold tracking-wider mb-2 ${i === 0 ? "text-base" : "text-sm"}`}>
-                    {feature.title}
-                  </h3>
-                  <p className={`font-body text-muted-foreground leading-relaxed ${i === 0 ? "text-base max-w-lg" : "text-sm"}`}>
-                    {feature.description}
-                  </p>
+                  <div>
+                    <h3 className="font-display text-sm font-bold tracking-wider mb-1.5">
+                      {feature.title}
+                    </h3>
+                    <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}

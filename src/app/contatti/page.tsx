@@ -1,12 +1,43 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send, Loader2, CheckCircle2, XCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { sendContactEmail } from "./actions";
 
 export default function Contatti() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [messaggio, setMessaggio] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    setSuccess(false);
+    setError("");
+
+    const result = await sendContactEmail({ nome, email, telefono, messaggio });
+
+    setLoading(false);
+    if (result.success) {
+      setSuccess(true);
+      setNome("");
+      setEmail("");
+      setTelefono("");
+      setMessaggio("");
+    } else {
+      setError(result.error || "Errore nell'invio.");
+    }
+  }
+
   return (
     <div className="relative">
       {/* Hero */}
@@ -42,7 +73,7 @@ export default function Contatti() {
             >
               <form
                 className="space-y-5 p-6 sm:p-8 bg-card/50 border border-white/5 clip-card-skew"
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSubmit}
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
@@ -51,6 +82,9 @@ export default function Contatti() {
                     </label>
                     <Input
                       placeholder="Il tuo nome"
+                      value={nome}
+                      onChange={(e) => setNome(e.target.value)}
+                      required
                       className="bg-black/50 border-white/10 font-body focus:border-l-gg-orange focus:border-l-2 focus:ring-0 focus:border-white/10"
                     />
                   </div>
@@ -61,6 +95,9 @@ export default function Contatti() {
                     <Input
                       type="email"
                       placeholder="la@tua.email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                       className="bg-black/50 border-white/10 font-body focus:border-l-gg-orange focus:border-l-2 focus:ring-0 focus:border-white/10"
                     />
                   </div>
@@ -76,6 +113,8 @@ export default function Contatti() {
                   <Input
                     type="tel"
                     placeholder="+39 ..."
+                    value={telefono}
+                    onChange={(e) => setTelefono(e.target.value)}
                     className="bg-black/50 border-white/10 font-body focus:border-l-gg-orange focus:border-l-2 focus:ring-0 focus:border-white/10"
                   />
                 </div>
@@ -87,16 +126,43 @@ export default function Contatti() {
                   <Textarea
                     placeholder="Raccontaci..."
                     rows={5}
+                    value={messaggio}
+                    onChange={(e) => setMessaggio(e.target.value)}
+                    required
                     className="bg-black/50 border-white/10 font-body resize-none focus:border-l-gg-orange focus:border-l-2 focus:ring-0 focus:border-white/10"
                   />
                 </div>
 
+                {success && (
+                  <div className="flex items-center gap-2 text-green-400 text-sm font-body">
+                    <CheckCircle2 className="h-4 w-4" />
+                    Messaggio inviato. Ti risponderemo al più presto.
+                  </div>
+                )}
+
+                {error && (
+                  <div className="flex items-center gap-2 text-red-400 text-sm font-body">
+                    <XCircle className="h-4 w-4" />
+                    {error}
+                  </div>
+                )}
+
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-gg-orange to-gg-red text-black font-display text-xs font-bold tracking-widest hover:opacity-90 animate-submit-pulse"
+                  disabled={loading}
+                  className="w-full bg-gradient-to-r from-gg-orange to-gg-red text-black font-display text-xs font-bold tracking-widest hover:opacity-90 animate-submit-pulse disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                  <Send className="h-3.5 w-3.5 mr-2" />
-                  INVIA MESSAGGIO
+                  {loading ? (
+                    <>
+                      <Loader2 className="h-3.5 w-3.5 mr-2 animate-spin" />
+                      INVIO IN CORSO...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-3.5 w-3.5 mr-2" />
+                      INVIA MESSAGGIO
+                    </>
+                  )}
                 </Button>
 
                 <p className="text-xs font-body text-muted-foreground/40 text-center">

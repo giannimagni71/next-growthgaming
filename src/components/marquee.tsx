@@ -18,10 +18,10 @@ export function Marquee() {
         {repeated.map((item, i) => (
           <span
             key={i}
-            className="font-display text-sm tracking-[0.3em] text-white/5 uppercase mx-8 flex-shrink-0"
+            className="font-display text-sm tracking-[0.3em] text-white/20 uppercase mx-8 flex-shrink-0"
           >
             {item}
-            <span className="ml-8 text-gg-orange/10">//</span>
+            <span className="ml-8 text-gg-orange/30">//</span>
           </span>
         ))}
       </div>

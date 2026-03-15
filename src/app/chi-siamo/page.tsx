@@ -5,6 +5,20 @@ import { Users, Target, Heart, Sword } from "lucide-react";
 import { aboutContent, manifesto } from "@/lib/data";
 import { SectionDivider } from "@/components/section-divider";
 
+function renderMarkdown(text: string) {
+  const parts = text.split(/(\*\*.+?\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={i} className="font-display text-base font-bold tracking-wider text-gg-orange">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
 export default function ChiSiamo() {
   return (
     <div className="relative">
@@ -44,19 +58,7 @@ export default function ChiSiamo() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
               >
-                {paragraph.startsWith("**") ? (
-                  <h3 className="font-display text-base font-bold tracking-wider text-gg-orange mt-10 mb-2">
-                    {paragraph.replace(/\*\*/g, "").split(" — ")[0]}
-                    {paragraph.includes(" — ") && (
-                      <span className="text-muted-foreground font-body font-normal text-lg">
-                        {" — "}
-                        {paragraph.replace(/\*\*/g, "").split(" — ")[1]}
-                      </span>
-                    )}
-                  </h3>
-                ) : (
-                  <p>{paragraph}</p>
-                )}
+                <p>{renderMarkdown(paragraph)}</p>
               </motion.div>
             ))}
           </div>
@@ -77,9 +79,7 @@ export default function ChiSiamo() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`group relative p-6 bg-card/60 border border-white/5 card-hover-dramatic clip-card-skew text-center overflow-hidden ${
-                  i === 0 ? "sm:col-span-3 sm:max-w-md sm:mx-auto sm:p-8" : ""
-                }`}
+                className="group relative p-6 bg-card/60 border border-white/5 card-hover-dramatic clip-card-skew text-center overflow-hidden"
               >
                 {/* Ghost number */}
                 <div className="ghost-text text-[100px] -right-2 -bottom-4 opacity-[0.03]">
@@ -124,30 +124,21 @@ export default function ChiSiamo() {
             </h2>
             <div className="space-y-4 font-body text-lg">
               {manifesto.content.split("\n\n").map((block, i) => {
-                if (block.startsWith("**") && block.includes("**")) {
-                  const num = block.match(/\d+\./)?.[0] || "";
-                  const title =
-                    block.match(/\*\*(.+?)\*\*/)?.[1]?.replace(/^\d+\.\s*/, "") || "";
-                  const desc = block.replace(/\*\*.+?\*\*\s*—?\s*/, "");
+                const numMatch = block.match(/^(\d+)\.\s/);
+                if (numMatch) {
+                  const text = block.replace(/^\d+\.\s/, "");
                   return (
                     <div key={i} className="flex gap-4 items-start">
                       <span className="font-display text-xs font-bold text-gg-orange/50 mt-1.5 w-6 flex-shrink-0">
-                        {num}
+                        {numMatch[1]}.
                       </span>
-                      <div>
-                        <span className="font-display text-sm font-bold tracking-wider text-foreground">
-                          {title}
-                        </span>
-                        {desc && (
-                          <span className="text-muted-foreground"> — {desc}</span>
-                        )}
-                      </div>
+                      <p className="text-muted-foreground">{renderMarkdown(text)}</p>
                     </div>
                   );
                 }
                 return (
                   <p key={i} className="text-muted-foreground leading-relaxed">
-                    {block}
+                    {renderMarkdown(block)}
                   </p>
                 );
               })}

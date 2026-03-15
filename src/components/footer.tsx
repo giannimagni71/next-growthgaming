@@ -107,6 +107,13 @@ export function Footer() {
               Privacy
             </Link>
             <span className="text-xs text-white/10">|</span>
+            <Link
+              href="/cookie-policy"
+              className="text-xs text-muted-foreground/60 hover:text-gg-orange transition-colors font-body"
+            >
+              Cookie Policy
+            </Link>
+            <span className="text-xs text-white/10">|</span>
             <span className="text-xs text-muted-foreground/40 font-mono">
               v2.0
             </span>

@@ -24,20 +24,12 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-3 group">
           <Image
-            src="/images/logo-sfondo-trasparente-Copia-300x293.png"
+            src="/images/gg-logo-bianco-trasp-150px.png"
             alt="Growth Gaming"
-            width={40}
-            height={40}
-            className="group-hover:drop-shadow-[0_0_12px_rgba(255,107,0,0.5)] transition-all duration-300"
+            width={150}
+            height={31}
+            className="h-auto w-[120px] sm:w-[150px] group-hover:drop-shadow-[0_0_12px_rgba(255,107,0,0.5)] transition-all duration-300"
           />
-          <div className="hidden sm:flex flex-col leading-none">
-            <span className="font-display text-sm font-bold tracking-wider text-foreground">
-              GROWTH
-            </span>
-            <span className="font-display text-sm font-bold tracking-wider text-gradient">
-              GAMING
-            </span>
-          </div>
         </Link>
 
         {/* Desktop nav */}

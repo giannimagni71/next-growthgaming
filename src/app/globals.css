@@ -285,10 +285,20 @@
 .video-overlay {
   background: linear-gradient(
     to bottom,
-    rgba(10, 10, 10, 0.5) 0%,
-    rgba(10, 10, 10, 0.15) 40%,
-    rgba(10, 10, 10, 0.15) 60%,
+    rgba(10, 10, 10, 0.6) 0%,
+    rgba(10, 10, 10, 0.15) 30%,
+    rgba(10, 10, 10, 0.15) 55%,
+    rgba(10, 10, 10, 0.7) 80%,
     #0a0a0a 100%
+  );
+}
+
+.video-vignette {
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 50%,
+    transparent 30%,
+    rgba(10, 10, 10, 0.5) 70%,
+    rgba(10, 10, 10, 0.9) 100%
   );
 }
 

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { CookieBanner } from "@/components/cookie-banner";
 import { CursorGlow } from "@/components/cursor-glow";
+import { AgentationDev } from "@/components/agentation-dev";
 import "./globals.css";
 
 const geistMono = Geist_Mono({
@@ -48,6 +50,8 @@ export default function RootLayout({
         <Navbar />
         <main className="pt-16 relative z-10">{children}</main>
         <Footer />
+        <CookieBanner />
+        <AgentationDev />
       </body>
     </html>
   );

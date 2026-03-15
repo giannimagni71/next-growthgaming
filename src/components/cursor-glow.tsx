@@ -27,7 +27,7 @@ export function CursorGlow() {
     <div
       className="cursor-glow pointer-events-none fixed inset-0 z-[9999] hidden md:block"
       style={{
-        background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, rgba(255, 107, 0, 0.06), transparent 60%)`,
+        background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, rgba(255, 107, 0, 0.12), transparent 60%)`,
       }}
     />
   );
