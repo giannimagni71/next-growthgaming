@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
+import { ArticleJsonLd } from "@/components/json-ld";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -19,6 +20,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    keywords: post.tags,
+    alternates: {
+      canonical: `https://growthgaming.it/news/${post.slug}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `https://growthgaming.it/news/${post.slug}`,
+      type: "article",
+      publishedTime: post.date,
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+    },
   };
 }
 
@@ -37,6 +55,13 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="relative">
+      <ArticleJsonLd
+        title={post.title}
+        description={post.excerpt}
+        url={`https://growthgaming.it/news/${post.slug}`}
+        datePublished={post.date}
+        image={post.image}
+      />
       <article className="py-24 sm:py-32 relative">
         {/* Atmospheric gradient */}
         <div className="absolute top-0 left-0 right-0 h-64 atmosphere-orange" />

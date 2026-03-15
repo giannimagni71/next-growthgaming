@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer";
 import { CookieBanner } from "@/components/cookie-banner";
 import { CursorGlow } from "@/components/cursor-glow";
 import { AgentationDev } from "@/components/agentation-dev";
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/json-ld";
 import "./globals.css";
 
 const geistMono = Geist_Mono({
@@ -13,6 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://growthgaming.it"),
   title: {
     default: "Growth Gaming — Giocare per crescere",
     template: "%s | Growth Gaming",
@@ -29,10 +31,31 @@ export const metadata: Metadata = {
     "videogiochi",
     "growth academy",
   ],
+  authors: [{ name: "Growth Gaming APS" }],
+  creator: "Growth Gaming APS",
   openGraph: {
     type: "website",
     locale: "it_IT",
+    url: "https://growthgaming.it",
     siteName: "Growth Gaming",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Growth Gaming — Giocare per crescere",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Growth Gaming — Giocare per crescere",
+    description:
+      "Associazione di promozione sociale dedicata alla cultura del videogioco. Esports, formazione, community.",
+    images: ["/opengraph-image"],
+  },
+  alternates: {
+    canonical: "https://growthgaming.it",
   },
 };
 
@@ -52,6 +75,8 @@ export default function RootLayout({
         <Footer />
         <CookieBanner />
         <AgentationDev />
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
       </body>
     </html>
   );

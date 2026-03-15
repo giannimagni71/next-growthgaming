@@ -12,26 +12,6 @@ export interface Post {
 
 export const posts: Post[] = [
   {
-    id: 5061,
-    slug: "periferiche-offerta-25-11-22",
-    title: "Periferiche in offerta al 25/11/22",
-    excerpt:
-      "La nostra rubrica sulle migliori periferiche gaming in offerta. HyperX, Meta Quest 2 e altro.",
-    content: `Una rubrica dedicata alle migliori periferiche gaming in offerta. Questa settimana segnaliamo:
-
-**HyperX Alloy Origins 60** — Tastiera meccanica RGB in formato 60%, compatta e reattiva. Perfetta per chi cerca il minimo ingombro senza rinunciare alla qualità costruttiva.
-
-**Meta Quest 2 128GB** — Il bundle con Resident Evil 4 resta uno dei modi migliori per entrare nel mondo VR. Standalone, senza bisogno di PC, con un catalogo di titoli ormai maturo.
-
-**Softbox 50x70 entry level** — Per chi fa streaming o crea contenuti, l'illuminazione è tutto. Una softbox entry level può fare la differenza tra un feed amatoriale e uno professionale.
-
-Il gaming non è solo il gioco in sé. È l'ecosistema che ci costruisci intorno.`,
-    date: "2022-11-25",
-    category: "news",
-    tags: ["hardware", "offerte", "periferiche"],
-    image: "/images/peripherals.jpg",
-  },
-  {
     id: 4314,
     slug: "growth-academy-ii-edizione",
     title: "Growth Academy — II Edizione",
