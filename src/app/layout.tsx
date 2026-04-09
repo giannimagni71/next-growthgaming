@@ -6,6 +6,7 @@ import { CookieBanner } from "@/components/cookie-banner";
 import { CursorGlow } from "@/components/cursor-glow";
 import { AgentationDev } from "@/components/agentation-dev";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/json-ld";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const geistMono = Geist_Mono({
@@ -75,6 +76,7 @@ export default function RootLayout({
         <Footer />
         <CookieBanner />
         <AgentationDev />
+        <Analytics />
         <OrganizationJsonLd />
         <WebSiteJsonLd />
       </body>
